@@ -8,5 +8,5 @@ const HospitalSchema = new mongoose.Schema({
     specialization: {type: String, required : true},
     capacity:{type: String, require: true}
 })
-const Hospital = mongoose.model('Customer', HospitalSchema)
+const Hospital = mongoose.model('Hostital', HospitalSchema)
 module.exports = Hospital;
