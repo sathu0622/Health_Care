@@ -5,7 +5,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
-const appointmentRoutes = require('./route/appointmentRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const HospitalRoutes = require('./routes/HospitalRouter');
 
 
 dotenv.config();
@@ -32,6 +33,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.use(cookieParser());
 app.use('/appointments', appointmentRoutes);
+app.use('/hospitals', HospitalRoutes);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
