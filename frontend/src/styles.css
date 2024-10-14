@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-primary {
+  @apply bg-[#0000]; 
+}
+
+.mobile-nav {
+  @apply  top-20 left-0 bg-gray-200 w-full ;
+}
+
+.mobile-nav li {
+  @apply w-full h-full text-center border-b-2;
+}
+
+
+
+/* Hide the default arrow */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Add custom arrow using ::before */
+details > summary::before {
+  content: '▶'; /* Default arrow icon */
+  transition: transform 0.3s ease-in-out;
+  @apply mr-2; /* Add margin to the right of the arrow */
+}
+
+/* Rotate the arrow when the details are open */
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.wordings{
+  @apply mr-2;
+  background-color: rgb(255, 240, 253);
+
+}
+
+footer .info{
+  align-items: center;
+  
+}
+
+.comName{
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18x;
+}
