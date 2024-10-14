@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const HospitalRoutes = require('./routes/HospitalRouter');
-
+const appointmentRoutes = require('./route/appointmentRoutes');
+const doctorsRouter = require('./route/DoctorDetails');
 
 dotenv.config();
 const {v4:uuidv4} =require("uuid");
@@ -34,6 +35,8 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use(cookieParser());
 app.use('/appointments', appointmentRoutes);
 app.use('/hospitals', HospitalRoutes);
+app.use('/api/doctors', doctorsRouter);
+app.use('api/send-pdf',)
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {

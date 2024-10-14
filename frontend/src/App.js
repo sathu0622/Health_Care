@@ -1,15 +1,23 @@
-import React from 'react';
+import React from "react";
+import "./index.css";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import '../src/styles.css';
+
+import DoctorForm from "./components/DoctorRegistration";
+import DoctorDetails from "./components/DoctorDetails";
 import AppointmentUI from './components/AppointmentUI'
 
 function App() {
   return (
-    <Router>
+    <>
+      <Router>
       <Routes>
-        <Route path="/" element={<AppointmentUI/>} />
+        {/* <Route path="/" element={<FrontPage/>} /> */}
+        <Route path="/add-doctor" element={<DoctorForm />} />
+        <Route path="/view-doctor" element={<DoctorDetails />} />
+        <Route path="/appointmentUI" element={<AppointmentUI />} />
       </Routes>
     </Router>
+    </>
   );
 }
 
