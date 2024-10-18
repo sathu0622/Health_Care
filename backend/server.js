@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use('/appointments', appointmentRoutes);
 app.use('/hospitals', HospitalRoutes);
 app.use('/api/doctors', doctorsRouter);
+// app.use('api/send-pdf',)
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
