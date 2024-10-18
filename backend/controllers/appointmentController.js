@@ -46,3 +46,20 @@ exports.getAllAppointments = async (req, res) => {
     }
 };
 
+exports.getAppointmentById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const appointment = await Appointment.findById(id).populate('hospital');
+        
+        if (!appointment) {
+            return res.status(404).json({ message: 'Appointment not found' });
+        }
+
+        res.json(appointment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+
