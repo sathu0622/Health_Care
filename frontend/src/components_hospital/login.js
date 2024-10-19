@@ -25,7 +25,7 @@ const Login = () => {
           console.log(email);
 
           if (email === "sathushan622@gmail.com") {
-            navigate("/add-product");
+            navigate("/add-z");
           } else {
             navigate("/manage-hospitals");
           }
