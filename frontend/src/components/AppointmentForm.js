@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import {
   Container,
@@ -13,9 +13,14 @@ import {
   Button,
   MenuItem,
   FormHelperText,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
 } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
@@ -29,17 +34,20 @@ const AppointmentForm = () => {
     timeZone: 'Europe/London',
   });
 
-  const [errors, setErrors] = useState({}); // State for error messages
+  const [errors, setErrors] = useState({});
+  const [openModal, setOpenModal] = useState(false); // State for modal visibility
+  const [appointmentId, setAppointmentId] = useState(null); // State for appointment ID
+  const qrCodeRef = useRef(); // Ref for QR code canvas
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' })); // Clear error on change
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
 
   const handleDateChange = (date) => {
     setFormData({ ...formData, appointmentDate: date });
-    setErrors((prevErrors) => ({ ...prevErrors, appointmentDate: '' })); // Clear error on date change
+    setErrors((prevErrors) => ({ ...prevErrors, appointmentDate: '' }));
   };
 
   const validateForm = () => {
@@ -63,30 +71,40 @@ const AppointmentForm = () => {
       newErrors.timeSlot = 'Time slot is required.';
     }
 
-    setErrors(newErrors); // Update errors state
-    console.log(newErrors); // Log errors for debugging
-    return Object.keys(newErrors).length === 0; // Returns true if no errors
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleDownload = () => {
+    const canvas = qrCodeRef.current.querySelector('canvas');
+    const pngUrl = canvas.toDataURL('image/png');
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = pngUrl;
+    downloadLink.download = `appointment-${appointmentId}.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     if (!validateForm()) {
-      console.log('Validation failed:', errors); // Log errors
-      return; // Validate and stop if there are errors
+      return;
     }
-  
+
     const appointmentData = {
       ...formData,
       doctor: 'Dr. Smith',
       hospital: '670ca50068a20696e6f7bc19',
     };
-  
+
     axios
       .post('http://localhost:5000/appointments', appointmentData)
       .then((res) => {
-        console.log('Upload response:', res.data);
-        // Clear form after successful submission if desired
+        const appointmentId = res.data.appointment._id;
+        setAppointmentId(appointmentId);
         setFormData({
           firstName: '',
           lastName: '',
@@ -97,10 +115,16 @@ const AppointmentForm = () => {
           timeSlot: '',
           timeZone: 'Europe/London',
         });
+
+        // Open the modal to show the QR code
+        setOpenModal(true);
       })
       .catch((err) => console.log(err));
   };
-  
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
   const timeSlots = [
     '09:00 AM - 10:00 AM',
@@ -277,6 +301,25 @@ const AppointmentForm = () => {
           Schedule
         </Button>
       </Box>
+
+      <Dialog open={openModal} onClose={handleClose}>
+        <DialogTitle>QR Code</DialogTitle>
+        <DialogContent>
+          <Box ref={qrCodeRef}>
+            {appointmentId && (
+              <QRCodeCanvas value={`${appointmentId}`} />
+            )}
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDownload} variant="contained" color="primary">
+            Download
+          </Button>
+          <Button onClick={handleClose} variant="outlined" color="secondary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
