@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const HospitalRoutes = require('./routes/HospitalRouter');
 const doctorsRouter = require('./routes/DoctorDetails');
+const UserRouter = require('./routes/UserRouter');
 
 dotenv.config();
 const {v4:uuidv4} =require("uuid");
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use('/appointments', appointmentRoutes);
 app.use('/hospitals', HospitalRoutes);
 app.use('/api/doctors', doctorsRouter);
+app.use('/api/user', UserRouter);
 // app.use('api/send-pdf',)
 
 // Serve frontend in production

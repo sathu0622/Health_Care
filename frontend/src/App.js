@@ -7,7 +7,10 @@ import DoctorDetails from "./components/DoctorDetails";
 import AppointmentUI from './components/AppointmentUI'
 import RegisterHospital from './components_hospital/RegisterHospital';
 import ManageHospitals from './components_hospital/ManageHospitals';
-
+import Register from './components_patient/Register';
+import Login from './components_patient/login';
+import PatientHospital from './components_patient/patientHospitalView';
+import LoginHospital from './components_hospital/login';
 
 function App() {
   return (
@@ -20,6 +23,11 @@ function App() {
         <Route path="/appointmentUI" element={<AppointmentUI />} />
         <Route path="/register-hospitals" element={<RegisterHospital />} />
         <Route path="/manage-hospitals" element={<ManageHospitals />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/hospital" element={<PatientHospital />} />
+        <Route path="/login-hospital" element={<LoginHospital />} />
+
       </Routes>
     </Router>
     </>

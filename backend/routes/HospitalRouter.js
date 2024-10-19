@@ -12,4 +12,6 @@ router.put('/:id', hospitalController.updateHospital);
 
 router.delete('/:id', hospitalController.deleteHospital);
 
+router.post('/login', hospitalController.hospitalLogin)
+
 module.exports = router;
