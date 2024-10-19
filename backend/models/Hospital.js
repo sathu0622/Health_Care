@@ -7,6 +7,5 @@ const HospitalSchema = new mongoose.Schema({
     image: {type: String},
     password: {type: String, required : true},
     specialization: {type: String, required : true},
-    capacity:{type: String, require: true}
 })
 module.exports = mongoose.model('hospital', HospitalSchema);

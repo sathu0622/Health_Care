@@ -8,7 +8,7 @@ const KEY = "jwttokenkey";
 
 // Create a new hospital
 exports.createHospital = async (req, res) => {
-    const {name, email, address, number, password, specialization, capacity, image} = req.body;
+    const {name, email, address, number, password, specialization, image} = req.body;
     const cus = await Hospital.findOne({ email })
     if (cus) {
       return res.json({ message: "user already existed" })
@@ -22,7 +22,6 @@ exports.createHospital = async (req, res) => {
       address,
       password: hashpassword,
       specialization,
-      capacity,
       image
     });
   

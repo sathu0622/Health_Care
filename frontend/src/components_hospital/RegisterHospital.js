@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Button, Form, Input, message } from "antd";
+import { useNavigate } from 'react-router-dom';
+import healthImage from '../assets/2.jpg'; // Import your image
 
 const RegisterHospital = () => {
   const [hospitalData, setHospitalData] = useState({
@@ -9,145 +12,172 @@ const RegisterHospital = () => {
     number: '',
     password: '',
     specialization: '',
-    capacity: '',
     image: ''
   });
 
-  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setHospitalData({ ...hospitalData, [e.target.name]: e.target.value });
   };
 
-  const validate = () => {
-    let tempErrors = {};
-    if (!hospitalData.name) tempErrors.name = "Name is required";
-    if (!hospitalData.email) tempErrors.email = "Email is required";
-    if (!/\S+@\S+\.\S+/.test(hospitalData.email)) tempErrors.email = "Email is not valid";
-    if (!hospitalData.address) tempErrors.address = "Address is required";
-    if (!hospitalData.number) tempErrors.number = "Contact number is required";
-    if (!/^[0-9]{10}$/.test(hospitalData.number)) tempErrors.number = "Contact number must be 10 digits";
-    if (!hospitalData.password || hospitalData.password.length < 6) tempErrors.password = "Password must be at least 6 characters";
-    if (!hospitalData.specialization) tempErrors.specialization = "Specialization is required";
-    if (!hospitalData.capacity || isNaN(hospitalData.capacity)) tempErrors.capacity = "Capacity must be a number";
-
-    setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validate()) {
-      try {
-        const response = await axios.post('http://localhost:5000/hospitals', hospitalData);
-        alert('Hospital registered successfully!');
-        console.log(response.data);
-      } catch (error) {
-        alert('Error registering hospital');
-        console.error(error);
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post('http://localhost:5000/hospitals', values);
+      if (response.data.success) {
+        message.success('Hospital registered successfully!');
+        navigate('/hospitals'); // Navigate after successful registration
+      } else {
+        message.error('Registration failed');
       }
+    } catch (error) {
+      message.error('Error registering hospital');
+      console.error(error);
     }
   };
 
   return (
-    <div className="max-w-lg mx-auto p-8 shadow-md bg-white rounded-lg">
-      <h2 className="text-2xl font-semibold text-center mb-6 text-gray-700">Register Hospital</h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="name"
-            placeholder="Hospital Name"
-            value={hospitalData.name}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+    <div className="flex h-screen">
+      <div className="w-1/2 h-full">
+        <img
+          src={healthImage} // Left side image
+          alt="Health"
+          className="object-cover h-full w-full"
+        />
+      </div>
+      <div className="w-1/2 flex items-center justify-center bg-gray-100">
+        <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full h-full overflow-y-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Register Hospital</h2>
+          <Form
+            name="register_hospital"
+            layout="vertical"
+            className="register-form"
+            onFinish={handleSubmit}
+          >
+            {/* Hospital Name Field */}
+            <Form.Item
+              label="Hospital Name"
+              name="name"
+              rules={[{ required: true, message: "Please enter the hospital name!" }]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter hospital name"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Email Field */}
+            <Form.Item
+              label="Hospital Email"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter the hospital email!" },
+                {
+                  type: 'email',
+                  message: "Please enter a valid email address!"
+                }
+              ]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter hospital email"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Address Field */}
+            <Form.Item
+              label="Hospital Address"
+              name="address"
+              rules={[{ required: true, message: "Please enter the hospital address!" }]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter hospital address"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Contact Number Field */}
+            <Form.Item
+              label="Contact Number"
+              name="number"
+              rules={[
+                { required: true, message: "Please enter the contact number!" },
+                {
+                  pattern: /^[0-9]{10}$/,
+                  message: "Contact number must be 10 digits!"
+                }
+              ]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter contact number"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Specialization Field */}
+            <Form.Item
+              label="Hospital Specialization"
+              name="specialization"
+              rules={[{ required: true, message: "Please enter the hospital specialization!" }]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter hospital specialization"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Image URL Field */}
+            <Form.Item
+              label="Hospital Image URL"
+              name="image"
+              rules={[{ required: true, message: "Please provide an image URL!" }]}
+            >
+              <Input
+                size="large"
+                placeholder="Enter image URL"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Password Field */}
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please provide a password!" },
+                { min: 6, message: "Password must be at least 6 characters long!" }
+              ]}
+            >
+              <Input.Password
+                size="large"
+                placeholder="Enter password"
+                onChange={handleChange}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </Form.Item>
+
+            {/* Register Button */}
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full py-3 text-white bg-green-600 hover:bg-green-700 rounded-md"
+            >
+              Register Hospital
+            </Button>
+          </Form>
         </div>
-        <div className="space-y-2">
-          <input
-            type="email"
-            name="email"
-            placeholder="Hospital Email"
-            value={hospitalData.email}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="address"
-            placeholder="Hospital Address"
-            value={hospitalData.address}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="number"
-            placeholder="Contact Number"
-            value={hospitalData.number}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.number && <p className="text-red-500 text-sm">{errors.number}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="specialization"
-            placeholder="Hospital Register No."
-            value={hospitalData.specialization}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.specialization && <p className="text-red-500 text-sm">{errors.specialization}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="capacity"
-            placeholder="Capacity"
-            value={hospitalData.capacity}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.capacity && <p className="text-red-500 text-sm">{errors.capacity}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="text"
-            name="image"
-            placeholder="ImageURL"
-            value={hospitalData.image}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>}
-        </div>
-        <div className="space-y-2">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={hospitalData.password}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-green-400 to-green-600 text-white py-3 rounded hover:from-green-500 hover:to-green-700 transition ease-in-out duration-300"
-        >
-          Register Hospital
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
