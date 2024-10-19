@@ -38,7 +38,7 @@ exports.createAppointment = async (req, res) => {
 
 exports.getAllAppointments = async (req, res) => {
     try {
-        const appointments = await Appointment.find().populate('hospital');
+        const appointments = await Appointment.find().populate('hospital').populate('doctor');
         res.json(appointments);
     } catch (error) {
         console.error(error);
@@ -49,7 +49,7 @@ exports.getAllAppointments = async (req, res) => {
 exports.getAppointmentById = async (req, res) => {
     try {
         const { id } = req.params;
-        const appointment = await Appointment.findById(id).populate('hospital');
+        const appointment = await Appointment.findById(id).populate('hospital').populate('doctor');
         
         if (!appointment) {
             return res.status(404).json({ message: 'Appointment not found' });
