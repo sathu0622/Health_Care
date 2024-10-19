@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/health.png";
 import image from "../assets/health.webp";
 import Image2 from "../assets/image2.jpg";
+import RoleSelection from "./RoleSelection";  // Import the RoleSelection popup
 
 const HomePage = () => {
+  const [isLoginPopupOpen, setLoginPopupOpen] = useState(false);
+
+  const openLoginPopup = () => {
+    setLoginPopupOpen(true);
+  };
+
+  const closeLoginPopup = () => {
+    setLoginPopupOpen(false);
+  };
+
   return (
     <div>
       <header className="bg-blue-900 text-white py-4">
@@ -35,15 +46,17 @@ const HomePage = () => {
             </Link>
           </nav>
           <div className="space-x-4">
-            <Link to="/login">
-              <button className="bg-white text-blue-900 px-4 py-2 rounded-md">
-                Login
-              </button>
-            </Link>
-            <Link to="/register">
-            <button className="bg-green-600 px-4 py-2 rounded-md">
-              Register
+            {/* Trigger popup on click */}
+            <button
+              onClick={openLoginPopup} // Open popup on login click
+              className="bg-white text-blue-900 px-4 py-2 rounded-md"
+            >
+              Login
             </button>
+            <Link to="/register">
+              <button className="bg-green-600 px-4 py-2 rounded-md">
+                Register
+              </button>
             </Link>
           </div>
         </div>
@@ -70,6 +83,9 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* Popup Component */}
+      <RoleSelection isOpen={isLoginPopupOpen} onClose={closeLoginPopup} />
 
       {/* Services Section */}
       <section id="services" className="py-12">

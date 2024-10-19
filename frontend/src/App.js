@@ -13,6 +13,7 @@ import Login from './components_patient/login';
 import PatientHospital from './components_patient/patientHospitalView';
 import LoginHospital from './components_hospital/login';
 import HomePage from "./components/HomePage";
+import RoleSelection from "./components/RoleSelection";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/patientHospital" element={<PatientHospital />} />
         <Route path="/login-hospital" element={<LoginHospital />} />
         <Route path="/" element={<HomePage/>}/>
+        <Route path="/roleSelection" element={<RoleSelection/>}/>
+        RoleSelection
       </Routes>
     </Router>
     </>
