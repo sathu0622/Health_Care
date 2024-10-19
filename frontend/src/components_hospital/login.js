@@ -25,9 +25,9 @@ const Login = () => {
           console.log(email);
 
           if (email === "sathushan622@gmail.com") {
-            navigate("/add-z");
+            navigate("/add-doctor");
           } else {
-            navigate("/manage-hospitals");
+            navigate("/add-doctor");
           }
         } else {
           message.error("Your password or email is incorrect");

@@ -12,10 +12,20 @@ exports.addDoctor = async (req, res) => {
   }
 };
 
+// exports.getAllDoctors = async (req, res) => {
+//   try {
+//     const doctors = await Doctor.find();
+//     res.send(doctors);
+//   } catch (error) {
+//     res.status(500).send({ message: error.message });
+//   }
+// };
+
 exports.getAllDoctors = async (req, res) => {
+  const { hospital } = req.query;
   try {
-    const doctors = await Doctor.find();
-    res.send(doctors);
+    const doctors = await Doctor.find({hospital})
+    res.json(doctors)
   } catch (error) {
     res.status(500).send({ message: error.message });
   }

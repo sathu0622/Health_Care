@@ -96,8 +96,8 @@ const AppointmentForm = () => {
 
     const appointmentData = {
       ...formData,
-      doctor: 'Dr. Smith',
-      hospital: '670ca50068a20696e6f7bc19',
+      doctor: '670c9bdfd65b4aea5d9d1515',
+      hospital: '6710f96fabcdae0a33f8c25b',
     };
 
     axios

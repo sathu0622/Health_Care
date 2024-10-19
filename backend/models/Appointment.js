@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const hospitalSchema = require('./Hospital')
 const Hospital = mongoose.model('Hospital', hospitalSchema.schema);
+const doctorSchema = require('./DoctorDetails')
+const Doctor = mongoose.model('Doctor', doctorSchema.schema);
 
 const appointmentSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
@@ -8,7 +10,10 @@ const appointmentSchema = new mongoose.Schema({
     email: { type: String, required: true },
     phoneNumber: { type: String, required: true },
     contactPreference: { type: String, enum: ['email', 'phone'], required: true },
-    doctor: { type: String, required: true },
+    doctor:{
+        type: mongoose.Types.ObjectId,
+        ref: Doctor
+      },
     hospital:{
         type: mongoose.Types.ObjectId,
         ref: Hospital

@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const DoctorRegistration = () => {
+
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const storedEmail = sessionStorage.getItem("userEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     from: '',
@@ -47,7 +57,13 @@ const DoctorRegistration = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/doctors/addDoctor', formData);
+
+      const doctorData = {
+        ...formData,
+        hospital: email,
+      };
+
+      await axios.post('http://localhost:5000/api/doctors/addDoctor', doctorData);
       
       // Success SweetAlert2 notification
       Swal.fire({

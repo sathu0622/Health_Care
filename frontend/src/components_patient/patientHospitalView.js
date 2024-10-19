@@ -20,11 +20,10 @@ const PatientsView = () => {
     }
   };
 
-  const handleViewClick = (hospitalId) => {
-    // You can implement navigation or modal opening logic here
-    console.log(`View hospital with ID: ${hospitalId}`);
-    navigate ("/view-doctor")
+  const handleViewClick = (hospitalEmail) => {
+    navigate("/view-doctor", { state: { email: hospitalEmail } });
   };
+  
 
   return (
     <div className="max-w-6xl mx-auto p-8 bg-gray-100 min-h-screen">
@@ -51,7 +50,7 @@ const PatientsView = () => {
                   </div>
                   <button 
                     className="px-5 py-2 bg-blue-600 text-white text-sm font-semibold rounded hover:bg-blue-700 transition duration-200"
-                    onClick={() => handleViewClick(hospital._id)}
+                    onClick={() => handleViewClick(hospital.email)}
                   >
                     View Details
                   </button>

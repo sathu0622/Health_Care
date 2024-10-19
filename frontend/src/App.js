@@ -7,10 +7,12 @@ import DoctorDetails from "./components/DoctorDetails";
 import AppointmentUI from './components/AppointmentUI'
 import RegisterHospital from './components_hospital/RegisterHospital';
 import ManageHospitals from './components_hospital/ManageHospitals';
+import AppointmentScanner from './components/AppointmentScanner'
 import Register from './components_patient/Register';
 import Login from './components_patient/login';
 import PatientHospital from './components_patient/patientHospitalView';
 import LoginHospital from './components_hospital/login';
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
@@ -23,11 +25,12 @@ function App() {
         <Route path="/appointmentUI" element={<AppointmentUI />} />
         <Route path="/register-hospitals" element={<RegisterHospital />} />
         <Route path="/manage-hospitals" element={<ManageHospitals />} />
+        <Route path="/appointmentScanner" element={<AppointmentScanner />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/hospital" element={<PatientHospital />} />
+        <Route path="/patientHospital" element={<PatientHospital />} />
         <Route path="/login-hospital" element={<LoginHospital />} />
-
+        <Route path="/" element={<HomePage/>}/>
       </Routes>
     </Router>
     </>
