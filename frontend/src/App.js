@@ -14,6 +14,7 @@ import PatientHospital from './components_patient/patientHospitalView';
 import LoginHospital from './components_hospital/login';
 import HomePage from "./components/HomePage";
 import RoleSelection from "./components/RoleSelection";
+import AdminPanel from "./components_hospital/AdminPanel"
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <Route path="/login-hospital" element={<LoginHospital />} />
         <Route path="/" element={<HomePage/>}/>
         <Route path="/roleSelection" element={<RoleSelection/>}/>
-        RoleSelection
+        <Route path="/adminPanel" element={<AdminPanel/>}/>
       </Routes>
     </Router>
     </>

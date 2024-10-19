@@ -26,9 +26,9 @@ const Login = () => {
           console.log(email);
 
           if (email === "sathushan622@gmail.com") {
-            navigate("/add-product");
+            navigate("/adminPanel");
           } else {
-            navigate("/manage-hospitals");
+            navigate("/patientHospital");
           }
         } else {
           message.error("Your password or email is incorrect");
@@ -55,7 +55,7 @@ const Login = () => {
         {/* Right side with Login form */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-            Log In
+          Patient Login
           </h2>
           
           <Form
@@ -105,7 +105,7 @@ const Login = () => {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full bg-purple-600 text-white py-2 rounded-md"
+              className="w-full bg-green-600 text-white py-2 rounded-md"
             >
               Log in
             </Button>
@@ -114,7 +114,7 @@ const Login = () => {
             <div className="text-center mt-4">
               <p className="text-gray-500">
                 Don't have an Account? &nbsp;
-                <Link to="/register" className="text-purple-600">
+                <Link to="/register" className="text-green-600">
                   Sign Up
                 </Link>
               </p>
