@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const KEY = "jwttokenkey"; 
 
 router.post('/register', async (req, res) => {
-  const { username, email, number, address, password } = req.body;
+  const { username, email, number, address, password, bloodGroup, DOB } = req.body;
   const cus = await Customer.findOne({ email })
   if (cus) {
     return res.json({ message: "user already existed" })
@@ -21,6 +21,8 @@ router.post('/register', async (req, res) => {
     number,
     address,
     password: hashpassword,
+    bloodGroup,
+    DOB
   });
 
   await newCustomer.save()
