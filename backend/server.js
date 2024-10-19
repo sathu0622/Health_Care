@@ -9,6 +9,7 @@ const appointmentRoutes = require('./routes/appointmentRoutes');
 const HospitalRoutes = require('./routes/HospitalRouter');
 const doctorsRouter = require('./routes/DoctorDetails');
 const UserRouter = require('./routes/UserRouter');
+const articleRoutes = require('./routes/Articles');
 
 dotenv.config();
 const {v4:uuidv4} =require("uuid");
@@ -38,6 +39,8 @@ app.use('/hospitals', HospitalRoutes);
 app.use('/api/doctors', doctorsRouter);
 app.use('/api/user', UserRouter);
 // app.use('api/send-pdf',)
+app.use('/api', articleRoutes);
+
 
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {

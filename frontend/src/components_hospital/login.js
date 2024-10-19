@@ -4,6 +4,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import healthImage from '../assets/2.jpg'; // Import your image.
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,66 +42,85 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-    <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-      
-        <Form
-          name="normal_login"
-          className="flex flex-col gap-4"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={handleSubmit}
-        >
-          <h3 className="text-2xl font-semibold text-center text-gray-800 mb-6">LOGIN</h3>
+      <div className="flex w-full max-w-5xl bg-white shadow-lg rounded-lg">
+        {/* Left side with Image */}
+        <div className="w-1/2 hidden md:flex items-center justify-center bg-purple-100">
+          <img
+          src={healthImage} // Image displayed on the left
+          alt="Health"
+          className="w-full h-full object-cover rounded-l-lg"
+          />
+        </div>
 
-          <Form.Item
-            name="email"
-            rules={[
-              { required: true, message: "Please enter your Email!" },
-              {
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Please enter a valid email address!",
-              },
-            ]}
+        {/* Right side with Login form */}
+        <div className="w-full md:w-1/2 p-8">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Log In
+          </h2>
+          
+          <Form
+            name="normal_login"
+            layout="vertical"
+            className="flex flex-col gap-4"
+            onFinish={handleSubmit}
           >
-            <Input
-              prefix={<MailOutlined />}
-              placeholder="Email"
-              className="w-full p-2 border-b border-black outline-none text-lg"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Item>
+            {/* Email Field */}
+            <Form.Item
+              name="email"
+              label="Email"
+              rules={[
+                { required: true, message: "Please enter your Email!" },
+                {
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  message: "Please enter a valid email address!",
+                },
+              ]}
+            >
+              <Input
+                size="large"
+                prefix={<MailOutlined />}
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2"
+              />
+            </Form.Item>
 
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
-          >
-            <Input
-              prefix={<LockOutlined />}
-              type="password"
-              placeholder="Password"
-              className="w-full p-2 border-b border-black outline-none text-lg"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Item>
+            {/* Password Field */}
+            <Form.Item
+              name="password"
+              label="Password"
+              rules={[{ required: true, message: "Please input your Password!" }]}
+            >
+              <Input
+                size="large"
+                prefix={<LockOutlined />}
+                type="password"
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2"
+              />
+            </Form.Item>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="w-full bg-purple-600 text-white rounded-md w-full p-8 mt-2 cursor-pointer py-2 rounded-md"
-          >
-            Log in
-          </Button>
+            {/* Login Button */}
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="w-full bg-purple-600 text-white py-2 rounded-md"
+            >
+              Log in
+            </Button>
 
-          <div className="text-center mt-4">
-          <p className="text-gray-500 mt-4">
-            Don't have an Account? &nbsp;
-            <Link to="/register" className="text-purple-600">
-              Sign Up
-            </Link>
-          </p>
-          </div>
-        </Form>
+            {/* Sign Up Link */}
+            <div className="text-center mt-4">
+              <p className="text-gray-500">
+                Don't have an Account? &nbsp;
+                <Link to="/register" className="text-purple-600">
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+          </Form>
+        </div>
       </div>
     </div>
   );
