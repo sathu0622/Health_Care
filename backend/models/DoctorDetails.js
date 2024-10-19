@@ -6,8 +6,9 @@ const doctorSchema = new mongoose.Schema({
   specialization: { type: String, required: true },
   availableDays: { type: [String], required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // Store hashed password only
+  password: { type: String, required: true },
   phoneNumber: { type: String, required: true },
+  hospital:{ type: String, required: true },
 });
 
 module.exports = mongoose.model('Doctor', doctorSchema);
