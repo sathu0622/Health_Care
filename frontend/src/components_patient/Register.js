@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { Button, Form, Input, message, DatePicker, Select } from "antd";
 import { useNavigate, Link } from "react-router-dom";
-import moment from "moment"; // For date formatting
-import healthImage from '../assets/2.jpg'; // Import your image
+import moment from "moment"; 
+import healthImage from '../assets/2.jpg'; 
 
 const { Option } = Select;
 
@@ -27,7 +27,7 @@ const Register = () => {
       address: values.address,
       password: values.password,
       bloodGroup: values.bloodGroup,
-      DOB: values.dob ? moment(values.dob).format("YYYY-MM-DD") : null, // Format the date
+      DOB: values.dob ? moment(values.dob).format("YYYY-MM-DD") : null, 
     })
       .then((response) => {
         if (response.data.status) {
@@ -53,7 +53,7 @@ const Register = () => {
       {/* Left side with Image */}
       <div className="flex-1">
         <img
-          src={healthImage} // Image displayed on the left
+          src={healthImage} 
           alt="Health"
           className="object-cover h-full w-full"
         />

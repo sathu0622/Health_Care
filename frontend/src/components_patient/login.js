@@ -28,7 +28,7 @@ const Login = () => {
           if (email === "sathushan622@gmail.com") {
             navigate("/adminPanel");
           } else {
-            navigate("/patientHospital");
+            navigate("/appointmentHospital");
           }
         } else {
           message.error("Your password or email is incorrect");
