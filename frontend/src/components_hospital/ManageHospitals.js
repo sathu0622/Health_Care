@@ -11,7 +11,8 @@ const ManageHospitals = () => {
     address: '',
     number: '',
     specialization: '',
-    capacity: ''
+    capacity: '',
+    image: ''
   });
   const [errors, setErrors] = useState({});
 
@@ -163,6 +164,17 @@ const ManageHospitals = () => {
                 className="w-full p-2 border border-gray-300 rounded"
               />
               {errors.capacity && <p className="text-red-500 text-sm">{errors.capacity}</p>}
+            </div>
+            <div>
+              <input
+                type="text"
+                name="image"
+                value={updatedData.image}
+                onChange={handleChange}
+                placeholder="ImageURL"
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+              {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>}
             </div>
             <button type="submit" className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">
               Update

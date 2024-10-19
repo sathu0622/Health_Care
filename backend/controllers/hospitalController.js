@@ -1,15 +1,53 @@
 const Hospital = require('../models/Hospital');
+const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const express = require('express');
+const bcrypt = require('bcrypt');
+
+const KEY = "jwttokenkey"; 
 
 // Create a new hospital
 exports.createHospital = async (req, res) => {
-    try {
-        const hospital = new Hospital(req.body);
-        await hospital.save();
-        res.status(201).json(hospital);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    const {name, email, address, number, password, specialization, capacity, image} = req.body;
+    const cus = await Hospital.findOne({ email })
+    if (cus) {
+      return res.json({ message: "user already existed" })
     }
+  
+    const hashpassword = await bcrypt.hash(password, 10)
+    const newCustomer = new Hospital({
+      name,
+      email,
+      number,
+      address,
+      password: hashpassword,
+      specialization,
+      capacity,
+      image
+    });
+  
+    await newCustomer.save()
+    return res.json({ status: true, message: "record registed" })
 };
+
+
+exports.hospitalLogin = async (req, res) => {
+    const { email, password } = req.body;
+    const user = await Hospital.findOne({ email })
+    if (!user) {
+      return res.json({ message: "User is not registered" })
+    }
+  
+    const validPassword = await bcrypt.compare(password, user.password)
+    if (!validPassword) {
+      return res.json({ message: "Password is incorrect" })
+    }
+  
+    const token = jwt.sign({ username: user.username }, KEY, { expiresIn: '1h' })
+    res.cookie('token', token, { httpOnly: true, maxAge: 360000 })
+    return res.json({ status: true, message: "login successfully" })
+  }
+  
 
 // Get all hospitals
 exports.getHospitals = async (req, res) => {

@@ -4,6 +4,7 @@ const HospitalSchema = new mongoose.Schema({
     email: {type: String, require: true, unique: true},
     address: {type: String, required : true},
     number: {type: String, required : true},
+    image: {type: String},
     password: {type: String, required : true},
     specialization: {type: String, required : true},
     capacity:{type: String, require: true}

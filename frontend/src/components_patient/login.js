@@ -14,7 +14,7 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
 
   const handleSubmit = (values) => {
-    Axios.post("http://localhost:5000/auth/login", {
+    Axios.post("http://localhost:5000/api/user/login", {
       email: values.email,
       password: values.password,
     })
@@ -27,7 +27,7 @@ const Login = () => {
           if (email === "sathushan622@gmail.com") {
             navigate("/add-product");
           } else {
-            navigate("/view-product");
+            navigate("/manage-hospitals");
           }
         } else {
           message.error("Your password or email is incorrect");
