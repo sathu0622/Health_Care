@@ -70,7 +70,7 @@ const Register = () => {
               size="large"
               placeholder="Enter your username"
               onChange={(e) => setUsername(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -90,7 +90,7 @@ const Register = () => {
               size="large"
               placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -110,7 +110,7 @@ const Register = () => {
               size="large"
               placeholder="Enter your phone number"
               onChange={(e) => setNumber(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -124,7 +124,7 @@ const Register = () => {
               size="large"
               placeholder="Enter your address"
               onChange={(e) => setAddress(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -162,7 +162,7 @@ const Register = () => {
               style={{ width: "100%" }}
               placeholder="Select your date of birth"
               onChange={(date) => setDob(date)}
-              className="p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -183,7 +183,7 @@ const Register = () => {
               size="large"
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -201,7 +201,7 @@ const Register = () => {
               size="large"
               placeholder="Confirm your password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="p-3 border rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </Form.Item>
 
@@ -209,7 +209,7 @@ const Register = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full py-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md"
+            className="w-full py-3 text-white bg-green-600 hover:bg-indigo-700 rounded-md"
           >
             Register
           </Button>
@@ -217,7 +217,7 @@ const Register = () => {
           {/* Footer: Link to Login */}
           <div className="mt-6 text-center">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-600 hover:underline">
+            <Link to="/login" className="text-green-600 hover:underline">
               Log In
             </Link>
           </div>

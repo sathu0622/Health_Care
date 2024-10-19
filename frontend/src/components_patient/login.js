@@ -87,7 +87,7 @@ const Login = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className="w-full bg-purple-600 text-white rounded-md w-full p-8 mt-2 cursor-pointer py-2 rounded-md"
+            className="w-full bg-green-600 text-white rounded-md w-full p-8 mt-2 cursor-pointer py-2 rounded-md"
           >
             Log in
           </Button>
@@ -95,7 +95,7 @@ const Login = () => {
           <div className="text-center mt-4">
           <p className="text-gray-500 mt-4">
             Don't have an Account? &nbsp;
-            <Link to="/register" className="text-purple-600">
+            <Link to="/register" className="text-green-600">
               Sign Up
             </Link>
           </p>
