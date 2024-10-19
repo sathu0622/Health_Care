@@ -22,7 +22,7 @@ import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { QRCodeCanvas } from 'qrcode.react';
 
-const AppointmentForm = () => {
+const AppointmentForm = ({ doctorId, hospitalId }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -93,11 +93,12 @@ const AppointmentForm = () => {
     if (!validateForm()) {
       return;
     }
+    console.log(hospitalId,doctorId)
 
     const appointmentData = {
       ...formData,
-      doctor: '670c9bdfd65b4aea5d9d1515',
-      hospital: '6710f96fabcdae0a33f8c25b',
+      doctor: doctorId,
+      hospital: hospitalId,
     };
 
     axios

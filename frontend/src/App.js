@@ -12,6 +12,8 @@ import Register from './components_patient/Register';
 import Login from './components_patient/login';
 import PatientHospital from './components_patient/patientHospitalView';
 import LoginHospital from './components_hospital/login';
+import AppointmentHospital from './components/AppointmentHospital';
+import AppointmentDoctor from './components/AppointmentDoctor';
 import HomePage from "./components/HomePage";
 import RoleSelection from "./components/RoleSelection";
 import AdminPanel from "./components_hospital/AdminPanel"
@@ -32,6 +34,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/patientHospital" element={<PatientHospital />} />
         <Route path="/login-hospital" element={<LoginHospital />} />
+        <Route path="/appointmentHospital" element={<AppointmentHospital />} />
+        <Route path="/appointmentDoctor" element={<AppointmentDoctor />} />
         <Route path="/" element={<HomePage/>}/>
         <Route path="/roleSelection" element={<RoleSelection/>}/>
         <Route path="/adminPanel" element={<AdminPanel/>}/>

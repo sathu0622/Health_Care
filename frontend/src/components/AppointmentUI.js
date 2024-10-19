@@ -4,10 +4,13 @@ import HospitalImage2 from '../assets/HospitalImage1.jpg';
 import HospitalImage3 from '../assets/HospitalImage1.jpg';
 import HospitalImage4 from '../assets/HospitalImage1.jpg';
 import AppointmentForm from '../components/AppointmentForm';
+import { useLocation } from 'react-router-dom'; // Import useLocation
 
 const AppointmentUI = () => {
     // Create a ref for the target section
     const targetRef = useRef(null);
+    const location = useLocation(); // Get the location object
+    const { hospitalId, doctorId } = location.state || {}; // Extract userId and doctorId
 
     // Function to handle button click
     const handleScroll = () => {
@@ -71,7 +74,7 @@ const AppointmentUI = () => {
 
             {/* Target Section for Scrolling */}
             <div ref={targetRef} className="mt-20 p-6 bg-gray-100 rounded-lg w-full">
-            <AppointmentForm />
+                <AppointmentForm hospitalId={hospitalId} doctorId={doctorId} /> {/* Pass userId and doctorId as props */}
             </div>
         </div>
     );
