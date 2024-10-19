@@ -41,30 +41,33 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="flex-1">
-        <img
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex w-full max-w-5xl bg-white shadow-lg rounded-lg">
+        {/* Left side with Image */}
+        <div className="w-1/2 hidden md:flex items-center justify-center bg-purple-100">
+          <img
           src={healthImage} // Image displayed on the left
           alt="Health"
-          className="object-cover h-full w-full"
-        />
-      </div>
-      <div className="flex-1 flex items-center justify-center bg-gray-100">
-        <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-md bg-opacity-90 backdrop-blur-sm">
+          className="w-full h-full object-cover rounded-l-lg"
+          />
+        </div>
+
+        {/* Right side with Login form */}
+        <div className="w-full md:w-1/2 p-8">
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Log In
+          </h2>
+          
           <Form
             name="normal_login"
+            layout="vertical"
             className="flex flex-col gap-4"
-            initialValues={{
-              remember: true,
-            }}
             onFinish={handleSubmit}
           >
-            <h3 className="text-3xl font-bold text-center text-gray-800 mb-6">
-              Patient Login
-            </h3>
-
+            {/* Email Field */}
             <Form.Item
               name="email"
+              label="Email"
               rules={[
                 { required: true, message: "Please enter your Email!" },
                 {
@@ -74,38 +77,44 @@ const Login = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<MailOutlined />}
-                placeholder="Email"
-                className="w-full p-2 border-b border-black outline-none text-lg"
+                placeholder="Enter your email"
                 onChange={(e) => setEmail(e.target.value)}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2"
               />
             </Form.Item>
 
+            {/* Password Field */}
             <Form.Item
               name="password"
+              label="Password"
               rules={[{ required: true, message: "Please input your Password!" }]}
             >
               <Input
+                size="large"
                 prefix={<LockOutlined />}
                 type="password"
-                placeholder="Password"
-                className="w-full p-2 border-b border-black outline-none text-lg"
+                placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
+                className="p-3 border rounded-md w-full focus:outline-none focus:ring-2"
               />
             </Form.Item>
 
+            {/* Login Button */}
             <Button
               type="primary"
               htmlType="submit"
-              className="bg-green-600 text-white rounded-md w-full py-2 mt-4"
+              className="w-full bg-purple-600 text-white py-2 rounded-md"
             >
               Log in
             </Button>
 
+            {/* Sign Up Link */}
             <div className="text-center mt-4">
               <p className="text-gray-500">
                 Don't have an Account? &nbsp;
-                <Link to="/register" className="text-green-600 font-semibold">
+                <Link to="/register" className="text-purple-600">
                   Sign Up
                 </Link>
               </p>

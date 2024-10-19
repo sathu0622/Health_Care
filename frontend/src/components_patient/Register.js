@@ -50,6 +50,7 @@ const Register = () => {
 
   return (
     <div className="flex min-h-screen">
+      {/* Left side with Image */}
       <div className="flex-1">
         <img
           src={healthImage} // Image displayed on the left
@@ -57,6 +58,8 @@ const Register = () => {
           className="object-cover h-full w-full"
         />
       </div>
+
+      {/* Right side with Register form */}
       <div className="flex-1 flex items-center justify-center bg-gray-100">
         <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
