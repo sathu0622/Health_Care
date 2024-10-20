@@ -8,4 +8,8 @@ router.get('/', appointmentController.getAllAppointments);
 
 router.get('/:id', appointmentController.getAppointmentById);
 
+router.get('/:email', appointmentController.getAppointmentByEmail);
+
+router.delete('/:id', appointmentController.deleteAppointment);
+
 module.exports = router;
