@@ -55,7 +55,7 @@ const Login = () => {
         {/* Right side with Login form */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-            Log In
+            Hospital Login
           </h2>
           
           <Form
@@ -109,16 +109,6 @@ const Login = () => {
             >
               Log in
             </Button>
-
-            {/* Sign Up Link */}
-            <div className="text-center mt-4">
-              <p className="text-gray-500">
-                Don't have an Account? &nbsp;
-                <Link to="/register" className="text-purple-600">
-                  Sign Up
-                </Link>
-              </p>
-            </div>
           </Form>
         </div>
       </div>

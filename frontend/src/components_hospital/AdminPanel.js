@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // FontAwesome for icons
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const AdminPanel = () => {
   const [doctors, setDoctors] = useState(0);
@@ -40,38 +41,50 @@ const AdminPanel = () => {
     <div className="flex">
       {/* Sidebar */}
       <aside className="h-screen w-64 bg-gray-800 text-white flex flex-col">
-        <div className="text-2xl font-bold text-center py-6 border-b border-gray-700">
-          HEALTH ADMIN
-        </div>
-        <nav className="flex-grow py-6">
-          <ul className="space-y-4">
-            <li className="px-6 py-2 hover:bg-gray-700">
+      <div className="text-2xl font-bold text-center py-6 border-b border-gray-700">
+        HEALTH ADMIN
+      </div>
+      <nav className="flex-grow py-6">
+        <ul className="space-y-4">
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/dashboard">
               <i className="fas fa-tachometer-alt mr-2"></i>
               <span>Dashboard</span>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-700">
+            </Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/doctor">
               <i className="fas fa-user-md mr-2"></i>
               <span>Doctor</span>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-700">
+            </Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/manage-hospitals">
               <i className="fas fa-procedures mr-2"></i>
-              <span>Patient</span>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-700">
+              <span>Hospital</span>
+            </Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/schedule">
               <i className="fas fa-calendar-alt mr-2"></i>
               <span>Schedule</span>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-700">
+            </Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/appointment">
               <i className="fas fa-notes-medical mr-2"></i>
               <span>Appointment</span>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-700">
+            </Link>
+          </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/payment">
               <i className="fas fa-credit-card mr-2"></i>
               <span>Payment</span>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </aside>
 
       {/* Dashboard Content */}
       <main className="flex-grow p-6 bg-gray-100">
@@ -127,3 +140,4 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+
