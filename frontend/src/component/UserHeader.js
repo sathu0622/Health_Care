@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from '../assest/health.png';
+import logo from '../assets/health.png';
 
 function UserHeader() {
   const [username, setUsername] = useState(null); 

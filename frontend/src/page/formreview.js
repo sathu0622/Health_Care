@@ -4,7 +4,7 @@ import "../index.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import UserHeader from "../component/UserHeader";
-import Footer from "../component/Footer";
+//import Footer from "../component/Footer";
 
 export default function Order() {
   const [formData, setFormData] = useState({
@@ -64,7 +64,7 @@ export default function Order() {
       }
 
       const res = await axios.post(
-        "http://localhost:3001/api/reviewbills",
+        "http://localhost:5000/api/reviewbills",
         formData
       );
       console.log(res.data.message);

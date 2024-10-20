@@ -82,6 +82,12 @@ const AdminPanel = () => {
               <span>Payment</span>
             </Link>
           </li>
+          <li className="px-6 py-2 hover:bg-gray-700">
+            <Link to="/listreview">
+              <i className="fas  mr-2"></i>
+              <span>⋇ Feedback</span>
+            </Link>
+          </li>
         </ul>
       </nav>
     </aside>

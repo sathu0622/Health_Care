@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UserHeader from '../component/UserHeader'
-import Footer from '../component/Footer'
+//import Footer from '../component/Footer'
 
 export const Review = () => {
   return (
@@ -19,7 +19,7 @@ export const Review = () => {
             <p className="font-bold text-lg">We for you</p>
             <p className="text-sm">You can Make Appointments and you can be able to access variable things from our website.</p>
           </div>
-          <Link to="/listreview">
+          <Link to="/appointmentUI">
           <button className="bg-sky-700 font-bold text-sm p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors">Make Appointment</button>
           </Link>
         </div>
@@ -123,7 +123,7 @@ We believe that everyone deserves access to excellent healthcare, regardless of 
                 </div>
                 <div className="text-center mt-6 mb-8">
                  <Link to="/">
-                   <button className="bg-sky-700 font-bold text-sm p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors ">Meet Doctors</button>
+                   <button className="bg-sky-700 font-bold text-sm p-2 px-6 rounded-xl hover:bg-sky-500 transition-colors ">View Homepage</button>
                  </Link>
                 </div>
 

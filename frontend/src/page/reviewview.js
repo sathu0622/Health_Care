@@ -4,8 +4,8 @@ import Button from '../component/Button'; // Assuming Button component is import
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import {useLocation} from 'react-router-dom'
-import Header from '../component/Header'
-import Footer from '../component/Footer'
+//import Header from '../component/Header'
+//import Footer from '../component/Footer'
 
 
 const Reviewview = () => {

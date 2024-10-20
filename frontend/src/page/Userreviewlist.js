@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import UserHeader from '../component/UserHeader';
-import Footer from '../component/Footer';
+//import Footer from '../component/Footer';
 import { Typography, Box, Dialog, DialogTitle, DialogContent } from "@mui/material";
-import AddButton from "../component/AddButton";
+//import AddButton from "../component/AddButton";
 
 function Reviewlist() {
   const [reviews, setReviews] = useState([]);
@@ -15,7 +15,7 @@ function Reviewlist() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/review");
+        const response = await axios.get("http://localhost:5000/api/review");
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);

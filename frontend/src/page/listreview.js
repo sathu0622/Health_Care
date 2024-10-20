@@ -46,7 +46,7 @@ function Reviewlist() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/review");
+        const response = await axios.get("http://localhost:5000/api/review");
         setReviews(response.data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
@@ -67,7 +67,7 @@ function Reviewlist() {
 
   const handleDeleteClick = async (review) => {
     try {
-      await axios.delete(`http://localhost:3001/api/reviewbills/${review._id}`);
+      await axios.delete(`http://localhost:5000/api/reviewbills/${review._id}`);
       const updatedReviews = reviews.filter((r) => r._id !== review._id);
       setReviews(updatedReviews);
     } catch (error) {
@@ -85,13 +85,13 @@ function Reviewlist() {
       };    
 
       await axios.put(
-        `http://localhost:3001/api/review/${editReview._id}`,
+        `http://localhost:5000/api/review/${editReview._id}`,
         updatedReview
       );
 
       setOpenDialog(false);
 
-      const response = await axios.get("http://localhost:3001/api/review");
+      const response = await axios.get("http://localhost:5000/api/review");
       setReviews(response.data);
     } catch (error) {
       console.error("Error updating reviews:", error);
@@ -115,9 +115,7 @@ function Reviewlist() {
   
   )
 
-  
 
-  //report
   const handlePDFDownload = () => {
     const doc = new jsPDF();
     doc.text('Filtered Feedback Details', 10, 10);

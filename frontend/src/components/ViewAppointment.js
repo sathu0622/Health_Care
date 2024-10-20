@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, CardContent, Typography, CircularProgress, Container, Button, Alert } from '@mui/material';
 import Header from '../header/UserHeader';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ViewAppointment = () => {
     const [appointments, setAppointments] = useState([]);
@@ -103,6 +103,7 @@ const ViewAppointment = () => {
                                     <strong>Time:</strong> {appointment?.timeSlot}
                                 </Typography>
                                 <div style={{ marginTop: '1rem' }}>
+                                    <Link to = "/review">
                                     <Button
                                         variant="contained"
                                         color="primary"
@@ -111,6 +112,7 @@ const ViewAppointment = () => {
                                     >
                                         Review Appointment
                                     </Button>
+                                    </Link>
                                     <Button
                                         variant="contained"
                                         color="error" 
