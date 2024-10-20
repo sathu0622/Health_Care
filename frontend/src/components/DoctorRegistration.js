@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import HospitalHeader from '../header/HospitalHeader';
 
 const DoctorRegistration = () => {
 
@@ -96,6 +97,9 @@ const DoctorRegistration = () => {
   };
 
   return (
+    <>
+    <HospitalHeader/>
+    <br /><br />
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Add Doctor</h2>
       <form onSubmit={handleSubmit}>
@@ -179,11 +183,12 @@ const DoctorRegistration = () => {
           pattern="\d{10,15}"
           className="mb-4 w-full p-2 border border-gray-300 rounded"
         />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        <button type="submit" className="w-full bg-green-500 text-white p-2 rounded hover:bg-blue-600">
           Add Doctor
         </button>
       </form>
     </div>
+    </>
   );
 };
 

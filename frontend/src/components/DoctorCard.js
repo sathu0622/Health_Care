@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 const DoctorCard = ({ doctor }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ ...doctor });
+  console.log(doctor)
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -46,7 +46,7 @@ const HomePage = () => {
             </Link>
           </nav>
           <div className="space-x-4">
-            {/* Trigger popup on click */}
+            
             <button
               onClick={openLoginPopup} // Open popup on login click
               className="bg-white text-blue-900 px-4 py-2 rounded-md"

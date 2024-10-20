@@ -43,7 +43,7 @@ const RoleSelection = ({ isOpen, onClose }) => {
 
           {/* GP */}
           <button
-            onClick={() => navigate('/gp')}
+            onClick={() => navigate('/doctorlogin')}
             className="flex flex-col items-center p-6 bg-lime-400 rounded-lg shadow-md hover:bg-lime-500 transition-all"
           >
             <div className="text-4xl text-white mb-4">
