@@ -59,7 +59,7 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-    navigate("/");
+    navigate("/appointmentHospital");
   };
 
   const onSubmit = (data) => {
@@ -72,8 +72,8 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
     axios
       .post("http://localhost:5000/appointments", appointmentData)
       .then((res) => {
-        const appointmentName = res.data.appointment.firstName;
-        setAppointmentId(appointmentName);
+        const appointmentId = res.data.appointment._id;
+        setAppointmentId(appointmentId);
         reset();
         setOpenModal(true);
       })

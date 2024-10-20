@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Header from '../header/UserHeader';
 
 const PatientsView = () => {
   const [hospitals, setHospitals] = useState([]);
@@ -29,7 +30,8 @@ const PatientsView = () => {
   };
 
   return (
-    <main className="max-w-6xl mx-auto p-8 bg-gray-100 min-h-screen">
+    <main className="w-full p-8 bg-gray-100 min-h-screen">
+      <Header />
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">Available Hospitals</h2>
       {loading && <p className="text-center text-gray-600">Loading hospitals...</p>}
       {error && <p className="text-center text-red-600">{error}</p>}
