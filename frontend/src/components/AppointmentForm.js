@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useRef } from "react";
+import axios from "axios";
 import {
   Container,
   TextField,
@@ -12,112 +12,69 @@ import {
   FormLabel,
   Button,
   MenuItem,
-  FormHelperText,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
-} from '@mui/material';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { QRCodeCanvas } from 'qrcode.react';
+  DialogTitle,
+  FormHelperText,
+} from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { QRCodeCanvas } from "qrcode.react";
+import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const AppointmentForm = ({ doctorId, hospitalId }) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    contactPreference: 'email',
-    appointmentDate: null,
-    timeSlot: '',
-    timeZone: 'Europe/London',
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      contactPreference: "email",
+      appointmentDate: null,
+      timeSlot: "",
+      timeZone: "Europe/London",
+    },
   });
 
-  const [errors, setErrors] = useState({});
-  const [openModal, setOpenModal] = useState(false); // State for modal visibility
-  const [appointmentId, setAppointmentId] = useState(null); // State for appointment ID
-  const qrCodeRef = useRef(); // Ref for QR code canvas
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-  };
-
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, appointmentDate: date });
-    setErrors((prevErrors) => ({ ...prevErrors, appointmentDate: '' }));
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = 'First name is required.';
-    if (!formData.lastName) newErrors.lastName = 'Last name is required.';
-    if (!formData.email) {
-      newErrors.email = 'Email is required.';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
-      newErrors.email = 'Enter a valid email address.';
-    }
-    if (!formData.phoneNumber) {
-      newErrors.phoneNumber = 'Phone number is required.';
-    } else if (!/^\d{10,15}$/.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Enter a valid phone number (10-15 digits).';
-    }
-    if (!formData.appointmentDate) {
-      newErrors.appointmentDate = 'Appointment date is required.';
-    }
-    if (!formData.timeSlot) {
-      newErrors.timeSlot = 'Time slot is required.';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const navigate = useNavigate(); // Initialize navigate
+  const [openModal, setOpenModal] = useState(false);
+  const [appointmentId, setAppointmentId] = useState(null);
+  const qrCodeRef = useRef();
 
   const handleDownload = () => {
-    const canvas = qrCodeRef.current.querySelector('canvas');
-    const pngUrl = canvas.toDataURL('image/png');
+    const canvas = qrCodeRef.current.querySelector("canvas");
+    const pngUrl = canvas.toDataURL("image/png");
 
-    const downloadLink = document.createElement('a');
+    const downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
     downloadLink.download = `appointment-${appointmentId}.png`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+    navigate("/");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-    console.log(hospitalId,doctorId)
-
+  const onSubmit = (data) => {
     const appointmentData = {
-      ...formData,
+      ...data,
       doctor: doctorId,
       hospital: hospitalId,
     };
 
     axios
-      .post('http://localhost:5000/appointments', appointmentData)
+      .post("http://localhost:5000/appointments", appointmentData)
       .then((res) => {
-        const appointmentId = res.data.appointment._id;
-        setAppointmentId(appointmentId);
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phoneNumber: '',
-          contactPreference: 'email',
-          appointmentDate: null,
-          timeSlot: '',
-          timeZone: 'Europe/London',
-        });
-
-        // Open the modal to show the QR code
+        const appointmentName = res.data.appointment.firstName;
+        setAppointmentId(appointmentName);
+        reset();
         setOpenModal(true);
       })
       .catch((err) => console.log(err));
@@ -128,147 +85,152 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
   };
 
   const timeSlots = [
-    '09:00 AM - 10:00 AM',
-    '10:00 AM - 11:00 AM',
-    '11:00 AM - 12:00 PM',
-    '01:00 PM - 02:00 PM',
-    '02:00 PM - 03:00 PM',
-    '03:00 PM - 04:00 PM',
+    "09:00 AM - 10:00 AM",
+    "10:00 AM - 11:00 AM",
+    "11:00 AM - 12:00 PM",
+    "01:00 PM - 02:00 PM",
+    "02:00 PM - 03:00 PM",
+    "03:00 PM - 04:00 PM",
   ];
 
-  const timeZones = [
-    'Europe/London',
-    'America/New_York',
-    'America/Los_Angeles',
-    'Asia/Tokyo',
-    'Australia/Sydney',
-  ];
+  const timeZones = ["Asia/SriLanka"];
 
   return (
     <Container maxWidth="sm">
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         sx={{
           mt: 4,
           p: 4,
-          border: '1px solid #ccc',
-          borderRadius: '8px',
+          border: "1px solid #ccc",
+          borderRadius: "8px",
           boxShadow: 3,
-          backgroundColor: '#fff',
+          backgroundColor: "#fff",
         }}
       >
         <Typography variant="h4" gutterBottom>
           Patient Appointment Form
         </Typography>
-        
-        {/* Layout using Box */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <TextField
             label="First Name"
-            name="firstName"
             fullWidth
-            required
-            value={formData.firstName}
-            onChange={handleChange}
+            {...register("firstName", {
+              required: "First name is required",
+              pattern: {
+                value: /^[A-Za-z\s]+$/,
+                message: "First name can only contain letters and spaces",
+              },
+            })}
             error={!!errors.firstName}
+            helperText={errors.firstName?.message}
           />
-          {errors.firstName && (
-            <FormHelperText sx={{ color: 'red' }}>
-              {errors.firstName}
-            </FormHelperText>
-          )}
 
           <TextField
             label="Last Name"
-            name="lastName"
             fullWidth
-            required
-            value={formData.lastName}
-            onChange={handleChange}
+            {...register("lastName", {
+              required: "Last name is required",
+              pattern: {
+                value: /^[A-Za-z\s]+$/,
+                message: "Last name can only contain letters and spaces",
+              },
+            })}
             error={!!errors.lastName}
+            helperText={errors.lastName?.message}
           />
-          {errors.lastName && (
-            <FormHelperText sx={{ color: 'red' }}>
-              {errors.lastName}
-            </FormHelperText>
-          )}
 
           <TextField
             label="Email"
-            name="email"
             type="email"
             fullWidth
-            required
-            value={formData.email}
-            onChange={handleChange}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                message: "Invalid email address",
+              },
+            })}
             error={!!errors.email}
+            helperText={errors.email?.message}
           />
-          {errors.email && (
-            <FormHelperText sx={{ color: 'red' }}>
-              {errors.email}
-            </FormHelperText>
-          )}
 
           <TextField
             label="Phone Number"
-            name="phoneNumber"
             type="tel"
             fullWidth
-            required
-            value={formData.phoneNumber}
-            onChange={handleChange}
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+              pattern: {
+                value: /^(0\d{9}|7\d{8}|\+94\d{9})$/,
+                message:
+                  "Phone number must be in the format 0775432888, 775432888, +94775432888, or 0112583697",
+              },
+            })}
             error={!!errors.phoneNumber}
+            helperText={errors.phoneNumber?.message}
           />
-          {errors.phoneNumber && (
-            <FormHelperText sx={{ color: 'red' }}>
-              {errors.phoneNumber}
-            </FormHelperText>
-          )}
 
-          <FormControl component="fieldset">
+          <FormControl component="fieldset" error={!!errors.contactPreference}>
             <FormLabel component="legend">Contact Preference</FormLabel>
-            <RadioGroup
-              row
+            <Controller
               name="contactPreference"
-              value={formData.contactPreference}
-              onChange={handleChange}
-            >
-              <FormControlLabel value="email" control={<Radio />} label="Via Email" />
-              <FormControlLabel value="phone" control={<Radio />} label="Via Phone" />
-            </RadioGroup>
+              control={control}
+              render={({ field }) => (
+                <RadioGroup row {...field}>
+                  <FormControlLabel
+                    value="email"
+                    control={<Radio />}
+                    label="Via Email"
+                  />
+                  <FormControlLabel
+                    value="phone"
+                    control={<Radio />}
+                    label="Via Phone"
+                  />
+                </RadioGroup>
+              )}
+            />
+            {errors.contactPreference && (
+              <FormHelperText>
+                {errors.contactPreference.message}
+              </FormHelperText>
+            )}
           </FormControl>
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Appointment Date"
-              value={formData.appointmentDate}
-              onChange={handleDateChange}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  fullWidth
-                  required
-                  error={!!errors.appointmentDate}
+            <Controller
+              name="appointmentDate"
+              control={control}
+              rules={{ required: "Appointment date is required" }}
+              render={({ field }) => (
+                <DatePicker
+                  label="Appointment Date"
+                  {...field}
+                  minDate={new Date()} // Prevent selecting past dates
+                  onChange={(date) => field.onChange(date)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      fullWidth
+                      error={!!errors.appointmentDate}
+                      helperText={errors.appointmentDate?.message}
+                    />
+                  )}
                 />
               )}
             />
-            {errors.appointmentDate && (
-              <FormHelperText sx={{ color: 'red' }}>
-                {errors.appointmentDate}
-              </FormHelperText>
-            )}
           </LocalizationProvider>
 
           <TextField
             select
             label="Time Slot"
-            name="timeSlot"
             fullWidth
-            required
-            value={formData.timeSlot}
-            onChange={handleChange}
+            {...register("timeSlot", { required: "Time slot is required" })}
             error={!!errors.timeSlot}
+            helperText={errors.timeSlot?.message}
           >
             {timeSlots.map((slot) => (
               <MenuItem key={slot} value={slot}>
@@ -276,19 +238,14 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
               </MenuItem>
             ))}
           </TextField>
-          {errors.timeSlot && (
-            <FormHelperText sx={{ color: 'red' }}>
-              {errors.timeSlot}
-            </FormHelperText>
-          )}
 
           <TextField
             select
             label="Time Zone"
-            name="timeZone"
             fullWidth
-            value={formData.timeZone}
-            onChange={handleChange}
+            {...register("timeZone", { required: "Time zone is required" })}
+            error={!!errors.timeZone}
+            helperText={errors.timeZone?.message}
           >
             {timeZones.map((zone) => (
               <MenuItem key={zone} value={zone}>
@@ -297,8 +254,13 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
             ))}
           </TextField>
         </Box>
-        
-        <Button type="submit" variant="contained" color="primary" sx={{ mt: 3 }}>
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ mt: 3 }}
+        >
           Schedule
         </Button>
       </Box>
@@ -307,9 +269,7 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
         <DialogTitle>QR Code</DialogTitle>
         <DialogContent>
           <Box ref={qrCodeRef}>
-            {appointmentId && (
-              <QRCodeCanvas value={`${appointmentId}`} />
-            )}
+            {appointmentId && <QRCodeCanvas value={`${appointmentId}`} />}
           </Box>
         </DialogContent>
         <DialogActions>

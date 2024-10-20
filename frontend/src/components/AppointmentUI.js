@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import HospitalImage1 from '../assets/HospitalImage1.jpg';
-import HospitalImage2 from '../assets/HospitalImage1.jpg';
-import HospitalImage3 from '../assets/HospitalImage1.jpg';
-import HospitalImage4 from '../assets/HospitalImage1.jpg';
+import HospitalImage2 from '../assets/HospitalImage2.jpg';
+import HospitalImage3 from '../assets/HospitalImage3.jpeg';
+import HospitalImage4 from '../assets/HospitalImage4.jpeg';
 import AppointmentForm from '../components/AppointmentForm';
 import { useLocation } from 'react-router-dom'; // Import useLocation
 
