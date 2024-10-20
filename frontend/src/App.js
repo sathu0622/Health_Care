@@ -16,8 +16,8 @@ import AppointmentHospital from './components/AppointmentHospital';
 import AppointmentDoctor from './components/AppointmentDoctor';
 import HomePage from "./components/HomePage";
 import RoleSelection from "./components/RoleSelection";
-import AdminPanel from "./components_hospital/AdminPanel"
-import Doctorlogin from "./components/Doctorlogin"
+import AdminPanel from "./components_hospital/AdminPanel";
+import ViewAppointment from './components/ViewAppointment'
 
 function App() {
   return (
@@ -40,7 +40,6 @@ function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/roleSelection" element={<RoleSelection/>}/>
         <Route path="/adminPanel" element={<AdminPanel/>}/>
-        <Route path="/doctorlogin" element={<Doctorlogin/>}/>
       </Routes>
     </Router>
     </>

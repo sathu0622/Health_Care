@@ -17,16 +17,15 @@ function UserHeader() {
     localStorage.removeItem("token"); 
     localStorage.removeItem("username"); 
     setUsername(null); 
-    
   };
 
   return (
     <div>
-      <nav className="bg-red-50 border-green-300 dark:bg-green-500">
+      <nav className="bg-white border-blue-300">
         <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
-          <Link to="/" className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600">
-            <img src={logo} className="w-10 h-10" alt="Pizza House Logo" />
-            <span className="self-center text-2xl font-semibold text-green-700 dark:text-green-100">
+          <Link to="/" className="block py-2 px-3 text-blue-600 hover:bg-blue-200 rounded md:bg-transparent md:text-blue-700">
+            <img src={logo} className="w-10 h-10" alt="HealthCare Logo" />
+            <span className="self-center text-2xl font-semibold text-blue-700">
               HealthCare
             </span>
           </Link>
@@ -36,7 +35,7 @@ function UserHeader() {
               <div className="relative inline-block text-left">
                 <button
                   type="button"
-                  className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+                  className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                 >
                   {username}
@@ -58,7 +57,7 @@ function UserHeader() {
             ) : (
               <Link
                 to="/login"
-                className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600"
+                className="block py-2 px-3 text-blue-600 hover:bg-blue-200 rounded md:bg-transparent md:text-blue-700"
               >
                 Login
               </Link>
@@ -66,27 +65,27 @@ function UserHeader() {
           </div>
 
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-            <ul className="flex flex-col p-6 md:p-0 mt-4 font-medium border border-green-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+            <ul className="flex flex-col p-6 md:p-0 mt-4 font-medium border border-blue-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <li>
                 <Link
-                  to="/makeappointment"
-                  className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600"
+                  to="/appointmentHospital"
+                  className="block py-2 px-3 text-blue-600 hover:bg-blue-200 rounded md:bg-transparent md:text-blue-700"
                 >
                   Make Appointment
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/articles"
-                  className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600"
+                  to="/appointmentScanner"
+                  className="block py-2 px-3 text-blue-600 hover:bg-blue-200 rounded md:bg-transparent md:text-blue-700"
                 >
-                  View Articles
+                  Scan Appointment
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/appointment"
-                  className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600"
+                  to="/viewAppointment"
+                  className="block py-2 px-3 text-blue-600 hover:bg-blue-200 rounded md:bg-transparent md:text-blue-700"
                 >
                   View Appointment
                 </Link>
