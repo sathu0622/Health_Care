@@ -23,6 +23,11 @@ import ReviewForm from "./page/formreview"
 import ReviewList from "./page/listreview"
 import ReviewView from "./page/reviewview"
 import UserReview from "./page/Userreviewlist"
+import Payment from "./components/Payment"
+import DoctorLogin from  "./components/Doctorlogin"
+import Doctor from "./components/Doctor";
+import AddArticle from "./components/AddArticle";
+import ViewArticles from "./components/ViewArticles"
 
 function App() {
   return (
@@ -51,6 +56,12 @@ function App() {
           <Route path="/listreview" element={<ReviewList />} />
           <Route path="/reviewview" element={<ReviewView />} />
           <Route path="/Userreviewlist" element={<UserReview />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/doctorlogin" element={<DoctorLogin />} /> 
+          <Route path="/doctor" element={<Doctor/>} /> 
+          <Route path="/postarticles" element={<AddArticle/>} /> 
+          <Route path="/viewArticles" element={<ViewArticles/>} /> 
+          
         </Routes>
       </Router>
     </>

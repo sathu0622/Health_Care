@@ -59,7 +59,7 @@ const AppointmentForm = ({ doctorId, hospitalId }) => {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-    navigate("/appointmentHospital");
+    navigate("/payment");
   };
 
   const onSubmit = (data) => {

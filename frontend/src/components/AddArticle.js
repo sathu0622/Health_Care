@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import DoctorHeader from '../component/DoctorHeader';
 
 const AddArticle = () => {
   const [title, setTitle] = useState('');
@@ -10,7 +11,7 @@ const AddArticle = () => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('/api/articles', {
+      const response = await axios.post('http://localhost:5000/api/articles', {
         title,
         description,
         imageURL,
@@ -23,6 +24,9 @@ const AddArticle = () => {
   };
 
   return (
+    <>
+    <DoctorHeader/>
+  
     <div className="max-w-md mx-auto mt-10">
       <h1 className="text-2xl font-bold mb-4">Add a New Article</h1>
       <form onSubmit={handleSubmit}>
@@ -77,6 +81,7 @@ const AddArticle = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

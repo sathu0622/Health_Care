@@ -16,3 +16,12 @@ exports.createArticle = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+exports.getArticle = async (req, res) => {
+  try {
+    const savedArticle = await Article.find();
+    res.status(201).json(savedArticle);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};

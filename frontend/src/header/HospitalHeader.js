@@ -60,7 +60,7 @@ function HospitalHeader() {
                 to="/login"
                 className="block py-2 px-3 text-green-600 hover:bg-green-200 rounded md:bg-transparent md:text-green-700 dark:text-green-300 dark:hover:bg-green-600"
               >
-                Login
+                Logout
               </Link>
             )}
           </div>

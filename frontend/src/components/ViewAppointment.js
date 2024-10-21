@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, CardContent, Typography, CircularProgress, Container, Button, Alert } from '@mui/material';
-import Header from '../header/UserHeader';
+import DoctorHeader from '../header/DoctorHeader';
 import { Link, useNavigate } from 'react-router-dom';
 
 const ViewAppointment = () => {
@@ -25,7 +25,7 @@ const ViewAppointment = () => {
             .then((response) => {
                 // Filter appointments based on the user's email
                 const filteredAppointments = response.data.filter((appt) => appt.email === email);
-                
+                console.log(filteredAppointments)
                 if (filteredAppointments.length > 0) {
                     setAppointments(filteredAppointments);
                 } else {
@@ -78,7 +78,7 @@ const ViewAppointment = () => {
 
     return (
         <div>
-            <Header />
+            <DoctorHeader />
             <Container style={{ marginTop: '2rem' }}>
                 {error && (
                     <Alert severity="error">{error}</Alert>

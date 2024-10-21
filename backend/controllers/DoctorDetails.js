@@ -42,7 +42,7 @@ exports.getDoctors = async (req, res) => {
 };
 
 exports.getAllDoctors = async (req, res) => {
-  const { hospital } = req.params;
+  const { hospital } = req.query;
   try {
     const doctors = await Doctor.find({ hospital });
     res.json(doctors);

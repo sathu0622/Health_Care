@@ -26,9 +26,9 @@ const Doctorlogin = () => {
           console.log(email);
 
           if (email === "sathushan622@gmail.com") {
-            navigate("/add-doctor");
+            navigate("/adminpanel");
           } else {
-            navigate("/add-doctor");
+            navigate("/doctor");
           }
         } else {
           message.error("Your password or email is incorrect");
@@ -55,7 +55,7 @@ const Doctorlogin = () => {
         {/* Right side with Login form */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-            Hospital Login
+            Doctor Login
           </h2>
           
           <Form

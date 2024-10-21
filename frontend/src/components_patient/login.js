@@ -4,7 +4,7 @@ import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import healthImage from '../assets/2.jpg'; // Import your image.
+import healthImage from "../assets/2.jpg"; // Import your image.
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ const Login = () => {
           console.log(response.data.status);
           console.log(email);
 
-          if (email === "sathushan622@gmail.com") {
+          if (email === "sathushan22@gmail.com") {
             navigate("/adminPanel");
           } else {
             navigate("/appointmentHospital");
@@ -46,18 +46,18 @@ const Login = () => {
         {/* Left side with Image */}
         <div className="w-1/2 hidden md:flex items-center justify-center bg-purple-100">
           <img
-          src={healthImage} // Image displayed on the left
-          alt="Health"
-          className="w-full h-full object-cover rounded-l-lg"
+            src={healthImage} // Image displayed on the left
+            alt="Health"
+            className="w-full h-full object-cover rounded-l-lg"
           />
         </div>
 
         {/* Right side with Login form */}
         <div className="w-full md:w-1/2 p-8">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Patient Login
+            Patient Login
           </h2>
-          
+
           <Form
             name="normal_login"
             layout="vertical"
@@ -89,7 +89,9 @@ const Login = () => {
             <Form.Item
               name="password"
               label="Password"
-              rules={[{ required: true, message: "Please input your Password!" }]}
+              rules={[
+                { required: true, message: "Please input your Password!" },
+              ]}
             >
               <Input
                 size="large"

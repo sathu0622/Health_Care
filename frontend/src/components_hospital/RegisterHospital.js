@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import { Button, Form, Input, message } from "antd";
-import { useNavigate } from 'react-router-dom';
-import healthImage from '../assets/2.jpg'; // Import your image
+import { useNavigate } from "react-router-dom";
+import healthImage from "../assets/2.jpg"; // Import your image
 
 const RegisterHospital = () => {
   const [hospitalData, setHospitalData] = useState({
-    name: '',
-    email: '',
-    address: '',
-    number: '',
-    password: '',
-    specialization: '',
-    image: ''
+    name: "",
+    email: "",
+    address: "",
+    number: "",
+    password: "",
+    specialization: "",
+    image: "",
   });
 
   const navigate = useNavigate();
@@ -23,15 +23,19 @@ const RegisterHospital = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post('http://localhost:5000/hospitals', values);
-      if (response.data.success) {
-        message.success('Hospital registered successfully!');
-        navigate('/hospitals'); // Navigate after successful registration
+      const response = await axios.post(
+        "http://localhost:5000/hospitals",
+        values
+      );
+      console.log(response.data);
+      if (response.data.status === true) {
+        message.success("Hospital registered successfully!");
+        navigate("/adminPanel"); // Navigate after successful registration
       } else {
-        message.error('Registration failed');
+        message.error("Registration failed");
       }
     } catch (error) {
-      message.error('Error registering hospital');
+      message.error("Error registering hospital");
       console.error(error);
     }
   };
@@ -47,7 +51,9 @@ const RegisterHospital = () => {
       </div>
       <div className="w-1/2 flex items-center justify-center bg-gray-100">
         <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full h-full overflow-y-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Register Hospital</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Register Hospital
+          </h2>
           <Form
             name="register_hospital"
             layout="vertical"
@@ -58,7 +64,9 @@ const RegisterHospital = () => {
             <Form.Item
               label="Hospital Name"
               name="name"
-              rules={[{ required: true, message: "Please enter the hospital name!" }]}
+              rules={[
+                { required: true, message: "Please enter the hospital name!" },
+              ]}
             >
               <Input
                 size="large"
@@ -75,9 +83,9 @@ const RegisterHospital = () => {
               rules={[
                 { required: true, message: "Please enter the hospital email!" },
                 {
-                  type: 'email',
-                  message: "Please enter a valid email address!"
-                }
+                  type: "email",
+                  message: "Please enter a valid email address!",
+                },
               ]}
             >
               <Input
@@ -92,7 +100,12 @@ const RegisterHospital = () => {
             <Form.Item
               label="Hospital Address"
               name="address"
-              rules={[{ required: true, message: "Please enter the hospital address!" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the hospital address!",
+                },
+              ]}
             >
               <Input
                 size="large"
@@ -110,8 +123,8 @@ const RegisterHospital = () => {
                 { required: true, message: "Please enter the contact number!" },
                 {
                   pattern: /^[0-9]{10}$/,
-                  message: "Contact number must be 10 digits!"
-                }
+                  message: "Contact number must be 10 digits!",
+                },
               ]}
             >
               <Input
@@ -124,9 +137,14 @@ const RegisterHospital = () => {
 
             {/* Specialization Field */}
             <Form.Item
-              label="Hospital Specialization"
+              label="Hospital regNo"
               name="specialization"
-              rules={[{ required: true, message: "Please enter the hospital specialization!" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the hospital specialization!",
+                },
+              ]}
             >
               <Input
                 size="large"
@@ -140,7 +158,9 @@ const RegisterHospital = () => {
             <Form.Item
               label="Hospital Image URL"
               name="image"
-              rules={[{ required: true, message: "Please provide an image URL!" }]}
+              rules={[
+                { required: true, message: "Please provide an image URL!" },
+              ]}
             >
               <Input
                 size="large"
@@ -156,7 +176,10 @@ const RegisterHospital = () => {
               name="password"
               rules={[
                 { required: true, message: "Please provide a password!" },
-                { min: 6, message: "Password must be at least 6 characters long!" }
+                {
+                  min: 6,
+                  message: "Password must be at least 6 characters long!",
+                },
               ]}
             >
               <Input.Password

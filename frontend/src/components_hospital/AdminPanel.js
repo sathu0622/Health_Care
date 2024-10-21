@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // FontAwesome for icons
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import SideBar from "./sidebar"
 
 const AdminPanel = () => {
   const [doctors, setDoctors] = useState(0);
@@ -13,18 +14,18 @@ const AdminPanel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const doctorsRes = await axios.get('http://localhost:5000/api/doctors/getDoctors');
+        const doctorsRes = await axios.get('http://localhost:5000/api/doctors/get');
         const patientsRes = await axios.get('http://localhost:5000/api/user/readCustomerDetails');
         const scheduleRes = await axios.get('http://localhost:5000/appointments');
         const paymentsRes = await axios.get('http://localhost:5000/hospitals');
         
         console.log(doctorsRes.data); // Log to verify the data structure
-        console.log(patientsRes.data);
+        console.log(patientsRes.data.length);
         console.log(scheduleRes.data);
         console.log(paymentsRes.data);
   
         setDoctors(doctorsRes.data.length); 
-        setPatients(patientsRes.data.length); 
+        setPatients(patientsRes.data.response.length); 
         setScheduled(scheduleRes.data.length); 
         setPayments(paymentsRes.data.length); 
   
@@ -40,58 +41,8 @@ const AdminPanel = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <aside className="h-screen w-64 bg-gray-800 text-white flex flex-col">
-      <div className="text-2xl font-bold text-center py-6 border-b border-gray-700">
-        HEALTH ADMIN
-      </div>
-      <nav className="flex-grow py-6">
-        <ul className="space-y-4">
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/dashboard">
-              <i className="fas fa-tachometer-alt mr-2"></i>
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/doctor">
-              <i className="fas fa-user-md mr-2"></i>
-              <span>Doctor</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/manage-hospitals">
-              <i className="fas fa-procedures mr-2"></i>
-              <span>Hospital</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/schedule">
-              <i className="fas fa-calendar-alt mr-2"></i>
-              <span>Schedule</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/appointment">
-              <i className="fas fa-notes-medical mr-2"></i>
-              <span>Appointment</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/payment">
-              <i className="fas fa-credit-card mr-2"></i>
-              <span>Payment</span>
-            </Link>
-          </li>
-          <li className="px-6 py-2 hover:bg-gray-700">
-            <Link to="/listreview">
-              <i className="fas  mr-2"></i>
-              <span>⋇ Feedback</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
+      
+    <SideBar/>
       {/* Dashboard Content */}
       <main className="flex-grow p-6 bg-gray-100">
         <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
